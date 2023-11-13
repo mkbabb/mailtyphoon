@@ -1,7 +1,7 @@
 {
     "name": "mailtyphoon",
-    "version": "3.2.0",
-    "description": "Transform tailwindcss (or any CSS-like file) into a compatible mail-viewer format",
+    "version": "3.2.1",
+    "description": "Transform tailwindcss (or any CSS-like file) into a compatible mail-viewer format.",
     "license": "MIT",
     "homepage": "https://github.com/mkbabb/mailtyphoon",
     "type": "module",
