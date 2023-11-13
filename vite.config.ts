@@ -4,18 +4,7 @@ import commonjs from "vite-plugin-commonjs";
 import dts from "vite-plugin-dts";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import { defineConfig } from "vitest/config";
-
-const SHEBANG = "#!/usr/bin/env node\n";
-
-const prependShebangPlugin = {
-    name: "prepend-shebang",
-    renderChunk(code, chunk, options) {
-        if (chunk.fileName.endsWith(".cjs")) {
-            return SHEBANG + code;
-        }
-        return null; // Return null to signify no change to the chunk
-    },
-};
+import { prependShebang } from "vite-plugin-shebang";
 
 export default defineConfig({
     base: "./",
@@ -43,10 +32,12 @@ export default defineConfig({
                 "path",
                 "os",
                 "child_process",
+                "crypto",
                 // node modules
                 "yargs/yargs",
                 "yargs/helpers",
                 "sass",
+                "lru-cache",
             ],
         },
 
@@ -66,11 +57,7 @@ export default defineConfig({
             reporter: ["text", "json", "html"],
         },
 
-        forceRerunTriggers: [
-            "./data/email.html",
-            "./data/email.scss",
-       
-        ],
+        forceRerunTriggers: ["./data/email.html", "./data/email.scss"],
 
         cache: false,
         watch: true,
@@ -82,6 +69,6 @@ export default defineConfig({
         nodePolyfills({
             protocolImports: true,
         }),
-        prependShebangPlugin,
+        prependShebang(),
     ],
 });

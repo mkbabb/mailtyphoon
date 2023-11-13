@@ -1,7 +1,7 @@
 {
     "name": "mailtyphoon",
-    "version": "3.2.1",
-    "description": "Transform tailwindcss (or any CSS-like file) into a compatible mail-viewer format.",
+    "version": "3.3.0",
+    "description": "Compile tailwindcss (or any CSS-like file) into a compatible mail-viewer format.",
     "license": "MIT",
     "homepage": "https://github.com/mkbabb/mailtyphoon",
     "type": "module",
@@ -16,13 +16,14 @@
             ]
         }
     },
+    "types": "./dist/mailtyphoon.d.ts",
     "scripts": {
-        "build": "vite build",
-        "test": "vitest",
-        "tmp": "vite build && chmod a+x ./dist/mailtyphoon.cjs"
+        "build": "vite build && chmod a+x ./dist/mailtyphoon.cjs",
+        "test": "vitest"
     },
     "dependencies": {
         "juice": "9.1.0",
+        "lru-cache": "^10.0.2",
         "rehype": "^13.0.1",
         "rehype-rewrite": "^4.0.0",
         "rehype-stringify": "^10.0.0",
@@ -37,6 +38,7 @@
         "vite-plugin-commonjs": "^0.10.0",
         "vite-plugin-dts": "^3.6.3",
         "vite-plugin-node-polyfills": "^0.16.0",
+        "vite-plugin-shebang": "^0.1.5",
         "vitest": "^0.34.6"
     },
     "peerDependencies": {
