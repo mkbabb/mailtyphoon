@@ -7,7 +7,7 @@ import { rehype } from "rehype";
 import rehypeRewrite from "rehype-rewrite";
 import stringify from "rehype-stringify";
 
-import { compileString } from "sass";
+import * as sass from "sass";
 
 import resetStyles from "../styles/reset.scss?inline";
 import universalStyles from "../styles/universal.scss?inline";
@@ -156,7 +156,7 @@ const inlineStyles = (html: string, tailwindCss: string, extraCss?: string[]) =>
     return hyped;
 };
 
-const mailtyphoonCss = async (inputHtml: string, options: Options) => {
+const compileString = async (inputHtml: string, options: Options) => {
     const tailwindCssPath = require.resolve("tailwindcss/lib/cli.js");
     const tailwindConfigPath = options.tailwindConfigPath ?? TAILWIND_CONFIG_PATH;
 
@@ -164,8 +164,7 @@ const mailtyphoonCss = async (inputHtml: string, options: Options) => {
     fs.writeFileSync(tmpInputHtmlPath, inputHtml);
 
     const tmpInputCssPath = path.join(os.tmpdir(), "mailtyphoon-input.css");
-    // const inputCss = options.css != null ? compileString(options.css).css : ""
-    const inputCss = "";
+    const inputCss = options.css != null ? sass.compileString(options.css).css : "";
 
     fs.writeFileSync(tmpInputCssPath, inputCss);
 
@@ -204,4 +203,4 @@ const mailtyphoonCss = async (inputHtml: string, options: Options) => {
     };
 };
 
-export { Options, mailtyphoonCss };
+export { Options, compileString };

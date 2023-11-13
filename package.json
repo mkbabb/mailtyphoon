@@ -1,12 +1,11 @@
 {
     "name": "mailtyphoon",
     "version": "3.1.0",
-    "description": "Use Tailwind CSS to design HTML emails.",
+    "description": "Transform tailwindcss (or any CSS-like file) into a compatible mail-viewer format",
     "license": "MIT",
     "homepage": "https://github.com/mkbabb/mailtyphoon",
     "type": "module",
     "author": "Mike Babb",
-
     "bin": {
         "mailtyphoon": "./dist/mailtyphoon.cjs"
     },

@@ -1,18 +1,17 @@
-import { mailtyphoonCss } from "../src/mailtyphoon";
-import { describe, it, assert } from "vitest";
-// import fs to read a file:
 import fs from "fs";
+import { assert, describe, it } from "vitest";
+import { compileString } from "../src/mailtyphoon";
 
 describe("windy", () => {
     it("should inline css", async () => {
-        const inputHtmlPath = fs.readFileSync("./data/email.html", "utf-8");
-        const inputCssPath = fs.readFileSync("./data/email.scss", "utf-8");
+        const inputHtml = fs.readFileSync("./data/email.html", "utf-8");
+        const inputCss = fs.readFileSync("./data/email.scss", "utf-8");
 
         const outputHtmlPath = "./data/out.html";
         const outputCssPath = "./data/out.css";
 
-        const output = await mailtyphoonCss(inputHtmlPath, {
-            // css: inputCssPath,
+        const output = await compileString(inputHtml, {
+            css: inputCss,
         });
 
         if (output == null) {

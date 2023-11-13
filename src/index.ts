@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { hideBin } from "yargs/helpers";
 import yargs from "yargs/yargs";
-import { mailtyphoonCss, Options } from "./mailtyphoon";
+import { compileString, Options } from "./mailtyphoon";
 
 import { TAILWIND_CONFIG_PATH } from "./utils";
 
@@ -18,13 +18,13 @@ const y = yargs(hideBin(process.argv))
         alias: "o",
         describe: "The path to the inlined HTML file that will be generated",
         type: "string",
-        default: path.resolve(__dirname, "../email.output.html"),
+        default: path.resolve(__dirname, "../out.html"),
         demandOption: true,
     })
     .option("input-css", {
         alias: "c",
         type: "string",
-        describe: "The path to your custom CSS file",
+        describe: "The path to your custom CSS or SASS file",
     })
     .option("output-css", {
         type: "string",
@@ -62,7 +62,7 @@ const main = async (): Promise<void> => {
         reset: reset === "false" ? false : true,
     };
 
-    const output = await mailtyphoonCss(inputHtml, options);
+    const output = await compileString(inputHtml, options);
 
     if (output == null) {
         console.log("Failed to generate output.");
