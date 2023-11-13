@@ -8,8 +8,8 @@ interface Options {
     /** Custom CSS to be injected */
     css?: string;
 }
-declare const mailtyphoonCss: (inputHtml: string, options: Options) => Promise<{
+declare const compileString: (inputHtml: string, options: Options) => Promise<{
     html: string;
     css: string;
 } | undefined>;
-export { Options, mailtyphoonCss };
+export { Options, compileString };

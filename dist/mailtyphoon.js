@@ -4,7 +4,7 @@ import Kt from "path";
 import { hideBin as uf } from "yargs/helpers";
 import tf from "yargs/yargs";
 import en from "os";
-import rf from "sass";
+import * as rf from "sass";
 import { spawn as af } from "child_process";
 var C = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
 function Ti(e) {
@@ -23758,12 +23758,12 @@ const NT = (e) => {
   alias: "o",
   describe: "The path to the inlined HTML file that will be generated",
   type: "string",
-  default: Kt.resolve(__dirname, "../email.output.html"),
+  default: Kt.resolve(__dirname, "../out.html"),
   demandOption: !0
 }).option("input-css", {
   alias: "c",
   type: "string",
-  describe: "The path to your custom CSS file"
+  describe: "The path to your custom CSS or SASS file"
 }).option("output-css", {
   type: "string",
   describe: "The path to the CSS file that will be generated"
@@ -23776,7 +23776,6 @@ const NT = (e) => {
   describe: "Set to `false` to disable extended resets",
   default: "false"
 }), MT = async () => {
-  console.log("Running mailtyphoon...");
   const e = await wT.argv, u = e["input-html"], t = e["output-html"], r = e["input-css"], a = e["output-css"], n = e["tailwind-config"], i = e.reset, c = rt.readFileSync(u, "utf-8"), o = {
     css: r != null ? rt.readFileSync(r, "utf-8") : void 0,
     tailwindConfigPath: n,
