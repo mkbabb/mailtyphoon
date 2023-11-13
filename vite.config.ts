@@ -46,13 +46,14 @@ export default defineConfig({
                 // node modules
                 "yargs/yargs",
                 "yargs/helpers",
+                "sass",
             ],
         },
 
         lib: {
             entry: path.resolve(__dirname, "src/index.ts"),
-            name: "Mailwind",
-            fileName: "mailwind",
+            name: "Mailtyphoon",
+            fileName: "mailtyphoon",
 
             formats: ["cjs", "es"],
         },
@@ -64,6 +65,13 @@ export default defineConfig({
         coverage: {
             reporter: ["text", "json", "html"],
         },
+
+        forceRerunTriggers: [
+            "./data/email.html",
+            "./data/email.scss",
+       
+        ],
+
         cache: false,
         watch: true,
     },

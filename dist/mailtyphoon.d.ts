@@ -1,4 +1,4 @@
-interface MailwindOptions {
+interface Options {
     /** A path to your tailwind.css file, optimized for email */
     tailwindConfigPath?: string;
     /** The base px value for 1rem, defaults to 16px */
@@ -8,8 +8,8 @@ interface MailwindOptions {
     /** Custom CSS to be injected */
     css?: string;
 }
-declare const mailwindCss: (inputHtml: string, options: MailwindOptions) => Promise<{
+declare const mailtyphoonCss: (inputHtml: string, options: Options) => Promise<{
     html: string;
     css: string;
 } | undefined>;
-export { MailwindOptions, mailwindCss };
+export { Options, mailtyphoonCss };

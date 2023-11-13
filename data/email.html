@@ -181,33 +181,25 @@
                                                 >
                                                     {% for n, change in enumerate(row["Changes"]) %}
                                                         <li
-                                                            class="grid grid-cols-4 p-1.5 even:bg-gray-100 odd:bg-gray-200 first:rounded-t-md last:rounded-b-md"
+                                                            class="grid grid-cols-3 p-1.5 even:bg-gray-100 odd:bg-gray-200 first:rounded-t-md last:rounded-b-md"
                                                         >
-                                                            <span class="font-bold">
+                                                            <span
+                                                                class="flex-1 font-bold break-words"
+                                                            >
                                                                 {{ change["column"] }}
                                                             </span>
-                                                            <span class="">
+                                                            <span
+                                                                class="flex-1 break-words"
+                                                            >
                                                                 {{ change["previous"] }}
                                                                 ➡️
                                                             </span>
-                                                            <span class="">
+                                                            <span
+                                                                class="flex-1 break-words"
+                                                            >
                                                                 {{ change["current"] }}
                                                             </span>
                                                         </li>
-                                                        <li
-                                                        class="grid grid-cols-4 p-1.5 even:bg-gray-100 odd:bg-gray-200 first:rounded-t-md last:rounded-b-md"
-                                                    >
-                                                        <span class="font-bold">
-                                                            {{ change["column"] }}
-                                                        </span>
-                                                        <span class="">
-                                                            {{ change["previous"] }}
-                                                            ➡️
-                                                        </span>
-                                                        <span class="">
-                                                            {{ change["current"] }}
-                                                        </span>
-                                                    </li>
                                                     {% endfor %}
                                                 </ul>
                                             {% endif %}

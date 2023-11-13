@@ -1,27 +1,27 @@
 {
-    "name": "@mkbabb/mailwind",
-    "version": "3.0.1",
+    "name": "mailtyphoon",
+    "version": "3.1.0",
     "description": "Use Tailwind CSS to design HTML emails.",
     "license": "MIT",
-    "homepage": "https://github.com/mkbabb/mailwind",
+    "homepage": "https://github.com/mkbabb/mailtyphoon",
     "type": "module",
+    "author": "Mike Babb",
 
     "bin": {
-        "mailwind": "./dist/mailwind.cjs"
+        "mailtyphoon": "./dist/mailtyphoon.cjs"
     },
     "typesVersions": {
         "*": {
             "*": [
-                "./dist/mailwind.d.ts"
+                "./dist/mailtyphoon.d.ts"
             ]
         }
     },
     "scripts": {
         "build": "vite build",
         "test": "vitest",
-        "tmp": "vite build && chmod a+x ./dist/mailwind.cjs"
+        "tmp": "vite build && chmod a+x ./dist/mailtyphoon.cjs"
     },
-    "author": "Soheil Rashidi, Mike Babb",
     "dependencies": {
         "juice": "9.1.0",
         "rehype": "^13.0.1",
@@ -30,18 +30,18 @@
         "yargs": "17.7.2"
     },
     "devDependencies": {
-        "@types/node": "^20.8.10",
-        "@types/yargs": "^17.0.29",
+        "@types/node": "^20.9.0",
+        "@types/yargs": "^17.0.31",
         "autoprefixer": "^10.4.16",
-        "sass": "^1.69.5",
-        "typescript": "^5.0.2",
-        "vite": "^4.4.5",
+        "typescript": "^5.2.2",
+        "vite": "^4.5.0",
         "vite-plugin-commonjs": "^0.10.0",
         "vite-plugin-dts": "^3.6.3",
-        "vite-plugin-node-polyfills": "^0.15.0",
+        "vite-plugin-node-polyfills": "^0.16.0",
         "vitest": "^0.34.6"
     },
     "peerDependencies": {
+        "sass": "^1.69.5",
         "tailwindcss": "3.x"
     }
 }

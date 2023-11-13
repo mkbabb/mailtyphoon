@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { hideBin } from "yargs/helpers";
 import yargs from "yargs/yargs";
-import { mailwindCss, MailwindOptions } from "./mailwind";
+import { mailtyphoonCss, Options } from "./mailtyphoon";
 
 import { TAILWIND_CONFIG_PATH } from "./utils";
 
@@ -42,7 +42,6 @@ const y = yargs(hideBin(process.argv))
     });
 
 const main = async (): Promise<void> => {
-    console.log("Running mailwind...");
     const argv = await y.argv;
 
     const inputHtmlPath = argv["input-html"];
@@ -57,13 +56,13 @@ const main = async (): Promise<void> => {
 
     const inputHtml = fs.readFileSync(inputHtmlPath, "utf-8");
 
-    const options: MailwindOptions = {
+    const options: Options = {
         css: inputCssPath != null ? fs.readFileSync(inputCssPath, "utf-8") : undefined,
         tailwindConfigPath,
         reset: reset === "false" ? false : true,
     };
 
-    const output = await mailwindCss(inputHtml, options);
+    const output = await mailtyphoonCss(inputHtml, options);
 
     if (output == null) {
         console.log("Failed to generate output.");

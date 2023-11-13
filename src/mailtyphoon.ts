@@ -7,12 +7,14 @@ import { rehype } from "rehype";
 import rehypeRewrite from "rehype-rewrite";
 import stringify from "rehype-stringify";
 
+import { compileString } from "sass";
+
 import resetStyles from "../styles/reset.scss?inline";
 import universalStyles from "../styles/universal.scss?inline";
 
 import { TAILWIND_CONFIG_PATH, exec } from "./utils";
 
-interface MailwindOptions {
+interface Options {
     /** A path to your tailwind.css file, optimized for email */
     tailwindConfigPath?: string;
     /** The base px value for 1rem, defaults to 16px */
@@ -154,17 +156,20 @@ const inlineStyles = (html: string, tailwindCss: string, extraCss?: string[]) =>
     return hyped;
 };
 
-const mailwindCss = async (inputHtml: string, options: MailwindOptions) => {
+const mailtyphoonCss = async (inputHtml: string, options: Options) => {
     const tailwindCssPath = require.resolve("tailwindcss/lib/cli.js");
     const tailwindConfigPath = options.tailwindConfigPath ?? TAILWIND_CONFIG_PATH;
 
-    const tmpInputHtmlPath = path.join(os.tmpdir(), "mailwind-input.html");
+    const tmpInputHtmlPath = path.join(os.tmpdir(), "mailtyphoon-input.html");
     fs.writeFileSync(tmpInputHtmlPath, inputHtml);
 
-    const tmpInputCssPath = path.join(os.tmpdir(), "mailwind-input.css");
-    fs.writeFileSync(tmpInputCssPath, options.css ?? "");
+    const tmpInputCssPath = path.join(os.tmpdir(), "mailtyphoon-input.css");
+    // const inputCss = options.css != null ? compileString(options.css).css : ""
+    const inputCss = "";
 
-    const tmpTailwindCssPath = path.join(os.tmpdir(), "mailwind-output.css");
+    fs.writeFileSync(tmpInputCssPath, inputCss);
+
+    const tmpTailwindCssPath = path.join(os.tmpdir(), "mailtyphoon-output.css");
     fs.writeFileSync(tmpTailwindCssPath, "");
 
     const args = [
@@ -191,10 +196,12 @@ const mailwindCss = async (inputHtml: string, options: MailwindOptions) => {
 
     const tailwindCss = fs.readFileSync(tmpTailwindCssPath, "utf-8") ?? "";
 
+    const html = inlineStyles(inputHtml, tailwindCss, [resetStyles, universalStyles]);
+
     return {
-        html: inlineStyles(inputHtml, tailwindCss, [resetStyles, universalStyles]),
+        html,
         css: tailwindCss,
     };
 };
 
-export { MailwindOptions, mailwindCss };
+export { Options, mailtyphoonCss };
