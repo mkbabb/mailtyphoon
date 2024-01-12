@@ -3,6 +3,7 @@ import crypto from "crypto";
 import fs from "fs";
 import { LRUCache } from "lru-cache";
 import path from "path";
+import process from "process";
 import { hideBin } from "yargs/helpers";
 import yargs from "yargs/yargs";
 import { compileString, Options } from "./mailtyphoon";
@@ -68,6 +69,7 @@ const watchFile = (filePath: string, callback: () => void): void => {
 
 const main = async (): Promise<void> => {
     const argv = await y.argv;
+
     const inputHtmlPath = argv["input-html"];
     const outputHtmlPath = argv["output-html"];
     const inputCssPath = argv["input-css"];
@@ -93,6 +95,7 @@ const main = async (): Promise<void> => {
         }
 
         const inputHtml = fs.readFileSync(inputHtmlPath, "utf-8");
+
         const options: Options = {
             css:
                 inputCssPath != null
@@ -131,5 +134,8 @@ const main = async (): Promise<void> => {
 
 main().catch((error) => {
     console.log(chalk.red(error?.message ?? "Unknown error"));
+
     y.showHelp();
+
+    process.exit(1);
 });
