@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import crypto from "crypto";
 import fs from "fs";
 import { LRUCache } from "lru-cache";
@@ -86,6 +87,11 @@ const main = async (): Promise<void> => {
             return;
         }
 
+        // check if the input HTML file exists
+        if (!fs.existsSync(inputHtmlPath)) {
+            throw new Error(`Input HTML file not found at ${inputHtmlPath}`);
+        }
+
         const inputHtml = fs.readFileSync(inputHtmlPath, "utf-8");
         const options: Options = {
             css:
@@ -98,8 +104,7 @@ const main = async (): Promise<void> => {
 
         const output = await compileString(inputHtml, options);
         if (output == null) {
-            console.log("Failed to generate output.");
-            process.exit(1);
+            throw new Error("Failed to compile HTML");
         }
 
         const { html, css } = output;
@@ -125,6 +130,6 @@ const main = async (): Promise<void> => {
 };
 
 main().catch((error) => {
-    console.error(error);
-    process.exit(1);
+    console.log(chalk.red(error?.message ?? "Unknown error"));
+    y.showHelp();
 });
